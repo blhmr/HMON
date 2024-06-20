@@ -238,7 +238,7 @@ void hmon_object_delete_key(HMON_Object **root, const char *restrict key) {
 
 	for (HMON_Object *curr = *root; curr->next != NULL; curr = curr->next) {
 		if (!strcmp(curr->next->key, key)) {
-			HMON_Object *pair_to_remove;
+			HMON_Object *pair_to_remove = curr->next;
 			curr->next = curr->next->next;
 			free((void*)pair_to_remove);
 			return;

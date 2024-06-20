@@ -6,12 +6,13 @@ install: src/hmon.c include/hmon.h
 	
 	@echo "==========[ BUILDING HMON ]=========="
 	$(CC) -c src/hmon.c -o src/hmon.o
-	ar rcs obj/libhmon.a obj/hmon.o
-	ar -t obj/libhmon.a
-	sudo cp obj/libhmon.a /usr/local/lib/
+	ar rcs src/libhmon.a src/hmon.o
+	ar -t src/libhmon.a
+	sudo cp src/libhmon.a /usr/local/lib/
 
 	@echo "==========[ CLEANING ]=========="
 	rm src/hmon.o
+	rm src/libhmon.a
 	@echo "==========[ DONE ]=========="
 
 uninstall:
