@@ -65,8 +65,9 @@ Format: (firstName='John', age=31, likesCoffee=true)
 More examples in **examples/**
 
 # Example of usage
-Mostly used for server-client architecture (REQUEST-RESPONSE server):
-<img src="imgs/example_img.png">
+These are the type of *personal projects* I was talking about
+<img src="imgs/example_database.png">
+<img src="imgs/example_server.png.png">
 
 # Does this support arrays and nesting ?
 No
