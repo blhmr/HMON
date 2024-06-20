@@ -20,5 +20,6 @@ int main(void) {
 
   // Update object
   hmon_object_update_float(&car, "price", 2000000.0);
+  hmon_object_print(&car);
   hmon_object_destroy(&car);
 }
