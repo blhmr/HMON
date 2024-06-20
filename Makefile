@@ -1,4 +1,4 @@
-CC=gcc
+CC=cc
 
 install: src/hmon.c include/hmon.h
 	@echo "==========[ INSTALLING HMON ]=========="

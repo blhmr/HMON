@@ -51,7 +51,7 @@ int main(void) {
   hmon_object_destroy(&object);
 
   // Much more in the example directory!
-	return 0;
+  return 0;
 }
 ```
 
