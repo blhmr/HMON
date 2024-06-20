@@ -84,4 +84,9 @@ char *hmon_object_format(HMON_Object **root);
 
 void hmon_parse_string_object(HMON_Object **root, const char *input);
 
+void hmon_object_update_string(HMON_Object **root, const char *key, const char *new_value);
+void hmon_object_update_int(HMON_Object **root, const char *key, int new_value);
+void hmon_object_update_float(HMON_Object **root, const char *key, float new_value);
+void hmon_object_update_boolean(HMON_Object **root, const char *key, bool new_value);
+
 #endif

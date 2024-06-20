@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include "../include/hmon.h"
+#include <string.h>
 
 // utils
 char *__trimmed_string(const char *restrict str) {
@@ -147,95 +148,103 @@ void hmon_object_print(HMON_Object **root) {
 }
 
 void hmon_object_add_string(HMON_Object **root, const char *restrict key, const char *restrict value) {
-	assert(key && value);
-	HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
-	if (new_pair == NULL) {
-		exit(-1);
-	}
-	new_pair->next = NULL;
-	new_pair->type = HMON_STRING;
-	strcpy(new_pair->key, key);
-	strcpy(new_pair->value.string_value, value);
+	if (!hmon_object_has_key(root, key)) {
+		assert(key && value);
+		HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
+		if (new_pair == NULL) {
+			exit(-1);
+		}
+		new_pair->next = NULL;
+		new_pair->type = HMON_STRING;
+		strcpy(new_pair->key, key);
+		strcpy(new_pair->value.string_value, value);
 
-	if (*root == NULL) {
-		*root = new_pair;
-		return;
-	}
+		if (*root == NULL) {
+			*root = new_pair;
+			return;
+		}
 
-	HMON_Object *curr = *root;
-	while (curr->next != NULL) {
-		curr = curr->next;
+		HMON_Object *curr = *root;
+		while (curr->next != NULL) {
+			curr = curr->next;
+		}
+		curr->next = new_pair;
 	}
-	curr->next = new_pair;
 }
 
 void hmon_object_add_int(HMON_Object **root, const char *restrict key, int value) {
-	assert(key);
-	HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
-	if (new_pair == NULL) {
-		exit(-1);
-	}
-	new_pair->next = NULL;
-	new_pair->type = HMON_INT;
-	strcpy(new_pair->key, key);
-	new_pair->value.int_value = value;
+	if (!hmon_object_has_key(root, key)) {
+		assert(key);
+		HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
+		if (new_pair == NULL) {
+			exit(-1);
+		}
+		new_pair->next = NULL;
+		new_pair->type = HMON_INT;
+		strcpy(new_pair->key, key);
+		new_pair->value.int_value = value;
 
-	if (*root == NULL) {
-		*root = new_pair;
-		return;
-	}
+		if (*root == NULL) {
+			*root = new_pair;
+			return;
+		}
 
-	HMON_Object *curr = *root;
-	while (curr->next != NULL) {
-		curr = curr->next;
+		HMON_Object *curr = *root;
+		while (curr->next != NULL) {
+			curr = curr->next;
+		}
+		curr->next = new_pair;
 	}
-	curr->next = new_pair;
 }
 
 void hmon_object_add_float(HMON_Object **root, const char *restrict key, float value) {
-	assert(key);
-	HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
-	if (new_pair == NULL) {
-		exit(-1);
-	}
-	new_pair->next = NULL;
-	new_pair->type = HMON_FLOAT;
-	strcpy(new_pair->key, key);
-	new_pair->value.float_value = value;
+	if (!hmon_object_has_key(root, key)) {
+		assert(key);
+		HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
+		if (new_pair == NULL) {
+			exit(-1);
+		}
+		new_pair->next = NULL;
+		new_pair->type = HMON_FLOAT;
+		strcpy(new_pair->key, key);
+		new_pair->value.float_value = value;
 
-	if (*root == NULL) {
-		*root = new_pair;
-		return;
-	}
+		if (*root == NULL) {
+			*root = new_pair;
+			return;
+		}
 
-	HMON_Object *curr = *root;
-	while (curr->next != NULL) {
-		curr = curr->next;
+		HMON_Object *curr = *root;
+		while (curr->next != NULL) {
+			curr = curr->next;
+		}
+		curr->next = new_pair;
 	}
-	curr->next = new_pair;
 }
 
 void hmon_object_add_boolean(HMON_Object **root, const char *restrict key, bool value) {
-	assert(key);
-	HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
-	if (new_pair == NULL) {
-		exit(-1);
-	}
-	new_pair->next = NULL;
-	new_pair->type = HMON_BOOLEAN;
-	strcpy(new_pair->key, key);
-	new_pair->value.boolean_value = value;
+	if (!hmon_object_has_key(root, key)) {
+		assert(key);
+		HMON_Object *new_pair = (HMON_Object*) malloc(sizeof(HMON_Object));
+		if (new_pair == NULL) {
+			exit(-1);
+		}
+		new_pair->next = NULL;
+		new_pair->type = HMON_BOOLEAN;
+		strcpy(new_pair->key, key);
+		new_pair->value.boolean_value = value;
 
-	if (*root == NULL) {
-		*root = new_pair;
-		return;
-	}
+		if (*root == NULL) {
+			*root = new_pair;
+			return;
+		}
 
-	HMON_Object *curr = *root;
-	while (curr->next != NULL) {
-		curr = curr->next;
+		HMON_Object *curr = *root;
+		while (curr->next != NULL) {
+			curr = curr->next;
+		}
+		curr->next = new_pair;
 	}
-	curr->next = new_pair;
 }
 
 void hmon_object_destroy(HMON_Object **root) {
@@ -402,4 +411,45 @@ void hmon_parse_string_object(HMON_Object **root, const char *restrict input) {
 	}
 
 	free((void*)trimmed);
+}
+
+void hmon_object_update_string(HMON_Object **root, const char *restrict key, const char *new_value) {
+	if (hmon_object_has_key(root, key)) {
+		for (HMON_Object *curr = *root; curr != NULL; curr = curr->next) {
+			if (!strcmp(curr->key, key) && curr->type == HMON_STRING) {
+				strncpy(curr->value.string_value, new_value, sizeof(new_value) - 1);
+				curr->value.string_value[sizeof(curr->value.string_value) - 1] = '\0';
+			}
+		}
+	}
+}
+
+void hmon_object_update_int(HMON_Object **root, const char *restrict key, int new_value) {
+	if (hmon_object_has_key(root, key)) {
+		for (HMON_Object *curr = *root; curr != NULL; curr = curr->next) {
+			if (!strcmp(curr->key, key) && curr->type == HMON_INT) {
+				curr->value.int_value = new_value;
+			}
+		}
+	}
+}
+
+void hmon_object_update_float(HMON_Object **root, const char *restrict key, float new_value) {
+	if (hmon_object_has_key(root, key)) {
+		for (HMON_Object *curr = *root; curr != NULL; curr = curr->next) {
+			if (!strcmp(curr->key, key) && curr->type == HMON_FLOAT) {
+				curr->value.float_value = new_value;
+			}
+		}
+	}
+}
+
+void hmon_object_update_boolean(HMON_Object **root, const char *restrict key, bool new_value) {
+	if (hmon_object_has_key(root, key)) {
+		for (HMON_Object *curr = *root; curr != NULL; curr = curr->next) {
+			if (!strcmp(curr->key, key) && curr->type == HMON_BOOLEAN) {
+				curr->value.int_value = new_value;
+			}
+		}
+	}
 }
