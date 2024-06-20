@@ -23,7 +23,7 @@ int main(void) {
   // Adding object properties
   hmon_object_add_string(&object, "firstName", "John");
   hmon_object_add_string(&object, "lastName", "Doe");
-  hmon_object_add_int(&object, "age", 31);
+  hmon_object_add_int(&object, "age", 32);
   hmon_object_add_boolean(&object, "likesCoffee", true);
 
   // Deleting a key
