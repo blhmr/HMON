@@ -67,7 +67,7 @@ More examples in **examples/**
 # Example of usage
 These are the type of *personal projects* I was talking about
 <img src="imgs/example_database.png">
-<img src="imgs/example_server.png.png">
+<img src="imgs/example_server.png">
 
 # Does this support arrays and nesting ?
 No
