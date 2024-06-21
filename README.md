@@ -14,6 +14,8 @@ The syntax of an object looks like this:
 Example of usage (this includes almost every function you need):
 
 ```c
+#define HMON_MAX_KEY_LEN 25 // This is 50 by default
+#define HMON_MAX_VALUE_STRING 20 // 50 by default
 #include <hmon.h>
 
 int main(void) {
@@ -66,6 +68,7 @@ More examples in **examples/**
 
 # Example of usage
 These are the type of *personal projects* I was talking about
+
 <img src="imgs/example_database.png">
 <img src="imgs/example_server.png">
 
