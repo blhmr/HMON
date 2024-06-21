@@ -79,9 +79,9 @@ void hmon_object_add_boolean(HMON_Object **root, const char *key, bool value);
 void hmon_object_destroy(HMON_Object **root);
 void hmon_object_delete_key(HMON_Object **root, const char *key);
 void hmon_object_reverse(HMON_Object **root);
+HMON_Type hmon_object_get_type(HMON_Object **root, const char *key);
 
 char *hmon_object_format(HMON_Object **root);
-
 void hmon_parse_string_object(HMON_Object **root, const char *input);
 
 void hmon_object_update_string(HMON_Object **root, const char *key, const char *new_value);
@@ -89,13 +89,11 @@ void hmon_object_update_int(HMON_Object **root, const char *key, int new_value);
 void hmon_object_update_float(HMON_Object **root, const char *key, float new_value);
 void hmon_object_update_boolean(HMON_Object **root, const char *key, bool new_value);
 
-/* In progress */
 char *hmon_object_get_string(HMON_Object **root, const char *key);
 int hmon_object_get_int(HMON_Object **root, const char *key);
 float hmon_object_get_float(HMON_Object **root, const char *key);
 bool hmon_object_get_boolean(HMON_Object **root, const char *key);
 
-// These are faster
 void hmon_object_set_string(HMON_Object **root, const char *key, const char *value);
 void hmon_object_set_int(HMON_Object **root, const char *key, int value);
 void hmon_object_set_float(HMON_Object **root, const char *key, float value);
