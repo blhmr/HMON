@@ -21,5 +21,16 @@ int main(void) {
 		free((void*)string_value);
 	}
 
+	// Get datatype
+	HMON_Type type = hmon_object_get_type(&object, "keyInt");
+	switch (type) {
+		case HMON_INT:
+			printf("Type is int\n");
+			break;
+		default:
+			printf("Type is not int\n");
+			break;
+	}
+
 	hmon_object_destroy(&object);
 }

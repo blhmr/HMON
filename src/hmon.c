@@ -637,7 +637,7 @@ void hmon_object_set_boolean(HMON_Object **root, const char *key, bool value) {
 
 HMON_Type hmon_object_get_type(HMON_Object **root, const char *key) {
 	HMON_Type type = HMON_UNKOWN;
-	for (HMON_Object *curr = *root, curr != NULL, curr = curr->next) {
+	for (HMON_Object *curr = *root; curr != NULL; curr = curr->next) {
 		if (!strcmp(curr->key, key)) {
 			type = curr->type;
 		}
