@@ -89,4 +89,16 @@ void hmon_object_update_int(HMON_Object **root, const char *key, int new_value);
 void hmon_object_update_float(HMON_Object **root, const char *key, float new_value);
 void hmon_object_update_boolean(HMON_Object **root, const char *key, bool new_value);
 
+/* In progress */
+char *hmon_object_get_string(HMON_Object **root, const char *key);
+int hmon_object_get_int(HMON_Object **root, const char *key);
+float hmon_object_get_float(HMON_Object **root, const char *key);
+bool hmon_object_get_boolean(HMON_Object **root, const char *key);
+
+// These are faster
+void hmon_object_set_string(HMON_Object **root, const char *key, const char *value);
+void hmon_object_set_int(HMON_Object **root, const char *key, int value);
+void hmon_object_set_float(HMON_Object **root, const char *key, float value);
+void hmon_object_set_boolean(HMON_Object **root, const char *key, bool value);
+
 #endif

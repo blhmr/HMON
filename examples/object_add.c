@@ -14,7 +14,7 @@ int main(void) {
 
 /*
   These are all the datatypes you can add to an object
-  (basically everything you need for a minimal object notaion)
+  (basically everything you need for a minimal object notation)
 */
 
   // Visualize object
