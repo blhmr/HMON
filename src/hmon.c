@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include "../include/hmon.h"
+#include <stdlib.h>
 
 // utils
 char *__trimmed_string(const char *restrict str) {
@@ -349,7 +350,6 @@ void hmon_parse_string_object(HMON_Object **root, const char *restrict input) {
 	if (trimmed == NULL) {
 		return;
 	}
-
 	if (trimmed[0] != '(' || trimmed[strlen(trimmed) - 1] != ')') {
 		return;
 	}
@@ -361,7 +361,7 @@ void hmon_parse_string_object(HMON_Object **root, const char *restrict input) {
 			HMON_Type type = HMON_UNKOWN;
 
 			const char *key_begin = ptr;
-			while (*ptr != '=') ptr++;
+			while (*ptr != '=' && *ptr != '\0' && *ptr != ')') ptr++;
 			const char *key_end = ptr;
 			strncpy(key, key_begin, key_end - key_begin);
 			key[key_end - key_begin] = '\0';
@@ -380,7 +380,7 @@ void hmon_parse_string_object(HMON_Object **root, const char *restrict input) {
 			}
 			else {
 				const char *value_begin = ptr;
-				while (*ptr != ',' && *ptr != '\0') ptr++;
+				while (*ptr != ',' && *ptr != '\0' && *ptr != ')') ptr++;
 				const char *value_end = ptr;
 				strncpy(value, value_begin, value_end - value_begin);
 				value[value_end - value_begin] = '\0';
@@ -391,7 +391,7 @@ void hmon_parse_string_object(HMON_Object **root, const char *restrict input) {
 			}
 			else {
 				if (__is_valid_int(value)) {
-					hmon_object_add_int(root, key, atoi(value));
+					hmon_object_add_int(root, key, strtol(value, NULL, 10));
 				}
 				else if (__is_valid_float(value)) {
 					hmon_object_add_float(root, key, strtod(value, NULL));
